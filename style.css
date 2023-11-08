@@ -44,14 +44,8 @@ body {
     background-position: center center;
 }
 .selected {
-    /*transform: rotateY(180deg);*/
-    border: 1px solid red;
+    transform: rotateY(180deg);
 }
 .match .front {
-    /*background: #6589F9 !important;*/
-    border: 1px solid orange;
-}
-.match {
-    background: #6589F9 !important;
     border: 1px solid orange;
 }
