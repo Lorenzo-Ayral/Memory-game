@@ -13,6 +13,10 @@ const cardsArray = [
     {    'name': 'Wordpress',    'img': 'https://github.com/robgmerrill/img/blob/master/wordpress-logo.png?raw=true',  },
 ];
 
+let counter = 0;
+let firstGuess = '';
+let secondGuess = '';
+
 const gameGrid = cardsArray.concat(cardsArray)
 gameGrid.sort(() => 0.5 - Math.random());
 
@@ -31,7 +35,37 @@ gameGrid.forEach(item => {
     grid.appendChild(card);
 })
 
+const match = () => {
+    const allSelected = document.querySelectorAll('.selected');
+    allSelected.forEach(element => {
+        element.classList.add('match');
+    })
+}
+
 grid.addEventListener('click', event => {
     const clickedElement = event.target;
-    clickedElement.classList.add('selected');
+    
+    if(clickedElement.nodeName === 'SECTION') {
+        return;
+    }
+    
+    if(counter < 2) {
+        counter++;
+        
+        if(counter === 1) {
+            firstGuess = clickedElement.dataset.name;
+            clickedElement.classList.add('selected');
+        } else {
+            secondGuess = clickedElement.dataset.name;
+            clickedElement.classList.add('selected');
+        }
+    }
+    
+    if(firstGuess !== '' && secondGuess !== '') {
+        if(firstGuess === secondGuess) {
+            match();
+        }
+    }
+    
+
 })
